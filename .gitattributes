@@ -1,5 +1,0 @@
-data/InSpireData.dat filter=lfs diff=lfs merge=lfs -text
-data/strumia.db filter=lfs diff=lfs merge=lfs -text
-data/strumia.dta filter=lfs diff=lfs merge=lfs -text
-data/AuthorsMap.mx filter=lfs diff=lfs merge=lfs -text
-data/AuthorID2Gender.nb filter=lfs diff=lfs merge=lfs -text

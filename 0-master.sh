@@ -2,7 +2,7 @@
 
 # Execute this file to perform all data transformation (starting with the raw data Strumia shared directly with me in November 2019) and analyses in Ball et al. (2020).
 
-# python 1-import.py
+python 1-import.py
 stata-mp -s 2-transform.do
 stata-mp -s 3-analyse.do
 	
