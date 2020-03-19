@@ -24,7 +24,7 @@ Transform data
 Analyse data
 ------------
 
-`3-analyse.do` uses `data/strumia.dta` to create Figures 1 and 2 in Ball et al. (2020). Execute it with the following command.
+`3-analyse.do` uses `data/strumia.dta` to create Figures 1 and 2 in Ball et al. (2020). Execute it with the following command (figures are stored in the `figures` directory).
 
 .. code-block:: bash
 	
@@ -33,7 +33,7 @@ Analyse data
 `master.sh`
 -----------
 
-To execute `1-import.py`, `2-transform.do` and `3-analyse.do` all at the same time execute the `0-master.sh` script:
+To execute ``1-import.py``, `2-transform.do` and `3-analyse.do` all at the same time execute the `0-master.sh` script:
 
 .. code-block:: bash
 
