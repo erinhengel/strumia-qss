@@ -58,8 +58,8 @@ label variable PubYear "Year of publication"
 label variable MinPubYear "Oldest author first pub. year"
 label variable Female "Female author"
 label variable FemN "No. InSpire female authors"
-label variable maxT "max \(T\)"
-label variable AuthorN "\(N\)"
+label variable maxT "max T"
+label variable AuthorN "N"
 
 compress
 save "data/strumia", replace
