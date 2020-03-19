@@ -61,4 +61,5 @@ label variable FemN "No. InSpire female authors"
 label variable maxT "max \(T\)"
 label variable AuthorN "\(N\)"
 
+compress
 save "data/strumia", replace
