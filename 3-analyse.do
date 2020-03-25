@@ -6,7 +6,7 @@ estimates clear
 * Keep only papers that:
 *		1. Were published in JHEP, Phys. Rev. D, Astophys. J., Phys. Rev. Lett. or Phys. Lett. B;
 *		2. Were published between 2010--2016;
-* 	3. Are solo-authored.
+*		3. Are solo-authored.
 use "data/strumia", clear
 keep if JournalID==1613970|JournalID==1214843|JournalID==1213103|JournalID==1214495|JournalID==1613966
 keep if PubYear>2009&PubYear<2017
@@ -35,12 +35,14 @@ foreach datatype in asinh raw {
 		local mbins 50
 		local fbins 10
 		local citations "Residualised citations (asinh)"
+		local legend legend(off)
 	}
 	else {
 		local depvar Cite
 		local mbins 1000
 		local fbins 50
 		local citations "Residualised citations"
+		local legend legend(label(1 "Male") label(2 "Female") position(2) size(small) symysize(small) symxsize(small))
 	}
 	tempvar fem_resid man_resid
 	reghdfe `depvar' maxT if Female==1, absorb(i.PubYear##i.JournalID MinPubYear) residuals(`fem_resid')
@@ -52,7 +54,7 @@ foreach datatype in asinh raw {
 		(histogram `fem_resid', color(pfpink%50) bin(`fbins')) ///
 		, name(adj_`datatype', replace) ///
 		scheme(publishing-female) ///
-		legend(off) ///
+		`legend' ///
 		xtitle("`citations'", size(medium)) ///
 		ytitle("") ///
 		ylabel(, labsize(small)) ///
@@ -68,8 +70,6 @@ graph export "figures/distributions.pdf", replace
 * Regress citations on female-authorship controlling for PubYear, maxT and
 * MinPubYear among the samples of articles published in each journal separately.
 * Plot the coefficient on female ratio along with its 95% confidence interval.
-label define journals 1213103 "JHEP" 1613970 "Phys.Rev.D" 1214843 "Astrophys.J." 1214495 "Phys.Rev.Lett." 1613966 "Phys.Lett.B"
-label values JournalID journals
 matrix b = J(1,6,.)
 matrix ses = J(1,6,.)
 local i 0
@@ -79,10 +79,9 @@ foreach journal in `ids' {
 	eststo est_`journal': reghdfe asinhCite i.Female if JournalID==`journal', absorb(PubYear maxT MinPubYear) vce(cluster MinPubYear)
 	matrix b[1, `i'] = _b[1.Female]
 	matrix ses[1, `i'] = _se[1.Female]
-	display "`: label journals `journal''"
-	local colnames `"`colnames' "`: label journals `journal''""'
+	local colnames `"`colnames' "`: label JournalID `journal''""'
 }
-eststo est_all: reghdfe asinhCite i.Female, absorb(i.PubYear##i.Journal maxT MinPubYear) vce(cluster MinPubYear)
+eststo est_all: reghdfe asinhCite i.Female, absorb(i.PubYear##i.JournalID maxT MinPubYear) vce(cluster MinPubYear)
 noisily display as text "female-authored papers receive about " as error `=round(100*_b[1.Female])' as text " log points more citations than male-authored papers (standard error " as error `=round(100*_se[1.Female], 0.1)' as text ")."
 matrix b[1, 6] = _b[1.Female]
 matrix ses[1, 6] = _se[1.Female]
@@ -94,7 +93,7 @@ coefplot matrix(b), ///
 	yline(0) ///
 	scheme(publishing_female) ///
 	name(coef, replace) ///
-	ytitle("Citations (asinh)", size(small)) ///
+	ytitle("Female advantage in citations (asinh)", size(small)) ///
 	ylabel(, labsize(small)) ///
 	xlabel(, labsize(small)) ///
 	aspectratio(0.4)

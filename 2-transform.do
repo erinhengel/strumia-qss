@@ -16,14 +16,14 @@ tempfile sex
 save `sex'
 
 * Generate journal rank (number of articles in the database published in a particular journal).
-odbc_compress, exec("SELECT * FROM JournalCorr;") dsn(Strumia)
-collapse (count) JnlRank=ArticleID, by(JournalID)
+odbc_compress, exec("SELECT * FROM JournalCorr NATURAL JOIN Journal;") dsn(Strumia)
+collapse (count) JnlRank=ArticleID (firstnm) JournalName, by(JournalID)
 tempfile jnlrank
 save `jnlrank'
 
 * Keep only the highest ranked journal if an article is published in multiple journals.
 odbc_compress, exec("SELECT * FROM JournalCorr;") dsn(Strumia)
-merge m:1 JournalID using `jnlrank', assert(match) nogenerate
+merge m:1 JournalID using `jnlrank', assert(master match) nogenerate
 tempvar max id
 by ArticleID, sort: egen `max' = max(JnlRank)
 by ArticleID JnlRank, sort: generate `id' = _n
@@ -46,6 +46,9 @@ odbc_compress, exec("SELECT ArticleID, PubDate, arXivDate, AuthorN, RefN, Cite, 
 merge 1:1 ArticleID using `sex', keep(match) nogenerate
 merge 1:1 ArticleID using `journal', keep(match) nogenerate
 merge 1:1 ArticleID using `experience', assert(using match) keep(match) nogenerate
+
+labmask JournalID, values(JournalName)
+drop JournalName
 
 generate PubYear = round(PubDate)
 generate MinPubYear = round(MinPubDate)

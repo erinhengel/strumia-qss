@@ -143,5 +143,21 @@ os.remove('data/gender.csv')
 with open('data/update.sql', 'r') as sql:
     cursor.executescript(sql.read())
 
+# Import journal data.
+os.system('wolframscript -code \'Export["data/journal.csv", Flatten[{#[[1]], StringTrim[#[[2]]]}] & /@ Import["data/JournalsMap.m"][[2 ;;, All]], "CSV"];\'')
+with open('data/journal.csv') as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter=',')
+    for line in csv_reader:
+        journal = {
+            'JournalID': int(line[0]),
+            'JournalName': line[1]
+        }
+
+        # Insert journal.
+        insert_query = "INSERT INTO Journal (JournalID, JournalName) VALUES (?, ?);"
+        cursor.execute(insert_query, (journal['JournalID'], journal['JournalName']))
+os.remove('data/journal.csv')
+
+
 # Commit changes and end.
 conn.commit()

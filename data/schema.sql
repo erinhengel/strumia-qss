@@ -46,5 +46,11 @@ CREATE TABLE JournalCorr (
 	PRIMARY KEY (ArticleID, JournalID)
 );
 
+DROP TABLE IF EXISTS Journal;
+CREATE TABLE Journal (
+	JournalID INTEGER PRIMARY KEY NOT NULL,
+	JournalName VARCHAR(1026)
+);
+
 COMMIT;
 PRAGMA foreign_keys=on;
