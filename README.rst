@@ -35,7 +35,9 @@ Analyse data
 ``master.sh``
 -----------
 
-``master.sh`` is a bash script that executes ``1-import.py``, ``2-transform.do`` and ``3-analyse.do`` at the same time. It also converts the pdf figure files created by ``2-transform.do`` into png files and trims excess whitespace around the figures using the ImageMagick command ``convert``. To execute ``0-master.sh`` type the following in the Bash command line.
+``master.sh`` is a bash script that executes ``1-import.py``, ``2-transform.do`` and ``3-analyse.do`` at the same time. It also converts the pdf figure files created by ``2-transform.do`` into png files and trims excess whitespace around the figures using the ImageMagick command ``convert``.
+
+To execute ``0-master.sh`` type the following in the Bash command line.
 
 .. code-block:: bash
 
