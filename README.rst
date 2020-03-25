@@ -6,7 +6,7 @@ Data and replication files for all analyses in Ball et al. (2020) "Gender issues
 Import data
 -------------------------------
 
-``1-import.py`` imports the raw InSpire data (``data/InSpire.dat``), merges it with data on authors' gender (``data/AuthoID2Gender.nb``) and other characteristics (``data/AuthorsMap.mx'') and journal names (``data/JournalsMap.m``). It then consolidates the data into a single SQLite database file (``data/strumia.db``; see ``data/schema.sql`` for database structure).
+``1-import.py`` imports the raw InSpire data (``data/InSpire.dat``), merges it with data on authors' gender (``data/AuthoID2Gender.nb``) and other characteristics (``data/AuthorsMap.mx``) and journal names (``data/JournalsMap.m``). It then consolidates the data into a single SQLite database file (``data/strumia.db``; see ``data/schema.sql`` for database structure).
 
 To execute the script, issue the following shell command.
 
