@@ -8,7 +8,7 @@ Import data
 
 ``1-import.py`` imports the raw InSpire data (``data/InSpire.dat``), merges it with data on authors' gender (``data/AuthoID2Gender.nb``) and other characteristics (``data/AuthorsMap.mx``) and journal names (``data/JournalsMap.m``). It then consolidates the data into a single SQLite database file (``data/strumia.db``; see ``data/schema.sql`` for database structure).
 
-To execute the script, issue the following shell command.
+To execute ``1-import.py``, issue the following shell command.
 
 .. code-block:: bash
 
@@ -37,7 +37,7 @@ Analyse data
 
 ``master.sh`` is a bash script that executes ``1-import.py``, ``2-transform.do`` and ``3-analyse.do`` at the same time. It also converts the pdf figure files created by ``2-transform.do`` into png files and trims excess whitespace around the figures using the ImageMagick command ``convert``.
 
-To execute ``0-master.sh`` type the following in the Bash command line.
+To execute ``0-master.sh``, type the following in the Bash command line.
 
 .. code-block:: bash
 
