@@ -1,7 +1,7 @@
 Replication files for Ball et al. (2020)
 ========================================
 
-Data and replication files for all analyses in Ball et al. (2020) "Gender issues in fundamental physics", which has been conditionally accepted for publication in `Quantitative Social Studies <https://www.mitpressjournals.org/loi/qss>`_.
+Data and replication files for all analyses in Ball et al. (2020) "Gender issues in fundamental physics", which has been conditionally accepted for publication in `Quantitative Science Studies <https://www.mitpressjournals.org/loi/qss>`_.
 
 Below is a brief description of each replication file. For further information, please consult each file's in-line comments.
 
